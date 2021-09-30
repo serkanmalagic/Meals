@@ -31,14 +31,12 @@ const DUMMY_MEALS = [
 ];
 
 const AvailableMeals = () => {
-  
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
 
   useEffect(() => {
     const fetchMeals = async () => {
-
       const response = await fetch(
         "https://react-http-f3f06-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
       );
@@ -67,13 +65,13 @@ const AvailableMeals = () => {
 
     try {
       fetchMeals();
-    }catch ( error ){
+    } catch (error) {
       setIsLoading(false);
       setHttpError(error.message);
     }
   });
 
-  if (loading){
+  if (isLoading) {
     return (
       <section className={classes.MealsLoading}>
         <p>Loading...</p>
@@ -81,10 +79,10 @@ const AvailableMeals = () => {
     );
   }
 
-  if (httpError){
+  if (httpError) {
     <section className={classes.MealsError}>
-        <p>{httpError}</p>
-      </section>
+      <p>{httpError}</p>
+    </section>;
   }
 
   const mealsList = meals.map((meal) => (
@@ -96,9 +94,6 @@ const AvailableMeals = () => {
       price={meal.price}
     />
   ));
-
-
-  
 
   return (
     <section className={classes.meals}>
